@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: ./docker/php/
+    #   args:
+    #     - USER_ID
+    #     - GROUP_ID
+    working_dir: /var/www/candle-grabber
+    # container_name: ann_app
+    volumes: 
+      - .:/var/www/candle-grabber
+    # environment:
+    #   XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1 remote_autostart=off  remote_port=9008"

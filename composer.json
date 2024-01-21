@@ -1,0 +1,27 @@
+{
+    "name": "alexandr/candle-grabber",
+    "authors": [
+        {
+            "name": "Alexandr Krylov",
+            "email": "alexandr.krylov@gmail.com"
+        }
+    ],
+    "description": "grabber of candles",
+    "license": "BSD-4-Clause",
+    "autoload": {
+        "psr-4": {
+            "app\\": ["src/"]
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^10.4",
+        "squizlabs/php_codesniffer": "3.*"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit ./tests",
+        "code-sniffer": [
+            "./vendor/bin/phpcs --colors --standard=PSR12 ./src ./tests"
+        ]
+    }
+}

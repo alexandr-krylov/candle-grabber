@@ -2,9 +2,9 @@ services:
   app:
     build:
       context: ./docker/php/
-    #   args:
-    #     - USER_ID
-    #     - GROUP_ID
+      # args:
+      #   UID: 1000
+      #   GID: 1000
     working_dir: /var/www/candle-grabber
     # container_name: ann_app
     volumes: 

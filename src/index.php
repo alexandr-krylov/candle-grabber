@@ -15,6 +15,6 @@ $params = ['query' => [
     'from' => '2024-02-12T00:00:00Z',
     'till' => '2024-02-12T00:15:00Z'
 ]];
-$response = $client->get('public/candles/BTCUSDT', $params);
-$body = $response->getBody();
-echo $body;
+// $response = $client->get('public/candles/BTCUSDT', $params);
+// $body = $response->getBody();
+// echo $body;

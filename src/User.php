@@ -18,7 +18,10 @@ class User
     #[ORM\Column(type: 'string')]
     private string $name;
 
+    #[ORM\OneToMany(targetEntity: Bug::class, mappedBy: 'reporter')]
     private Collection $reportedBugs;
+
+    #[ORM\OneToMany(targetEntity: Bug::class, mappedBy: 'engineer')]
     private Collection $assignedBugs;
 
     public function __construct()

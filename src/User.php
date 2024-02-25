@@ -1,5 +1,7 @@
 <?php
 
+namespace app;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,5 +40,15 @@ class User
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function addReportedBug(Bug $bug): void
+    {
+        $this->reportedBugs[] = $bug;
+    }
+
+    public function addAssignedBug(Bug $bug): void
+    {
+        $this->assignedBugs[] = $bug;
     }
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use app\User;
+use DateTime;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bugs')]
@@ -76,7 +77,7 @@ class Bug
 
     public function setEngineer(User $engineer): void
     {
-        $engineer->assignedToBug($this);
+        $engineer->addAssignedBug($this);
         $this->engineer = $engineer;
     }
 

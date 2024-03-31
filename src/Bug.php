@@ -5,10 +5,9 @@ namespace app;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use app\User;
 use DateTime;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: BugRepository::class)]
 #[ORM\Table(name: 'bugs')]
 class Bug
 {

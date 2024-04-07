@@ -8,3 +8,11 @@ services:
     working_dir: /var/www/candle-grabber
     volumes: 
       - .:/var/www/candle-grabber
+  db:
+    iamge: mariadb
+    container_name: candle-grabber-db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+    ports:
+      - 3306:3306

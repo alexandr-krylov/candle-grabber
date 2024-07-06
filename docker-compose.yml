@@ -9,7 +9,7 @@ services:
     volumes: 
       - .:/var/www/candle-grabber
   db:
-    iamge: mariadb
+    image: mariadb
     container_name: candle-grabber-db
     restart: always
     environment:

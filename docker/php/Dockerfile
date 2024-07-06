@@ -8,11 +8,14 @@ RUN groupadd --gid $GID node \
 RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get -y install libzip-dev git unzip
+    # && docker-php-ext-install xdebug
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 RUN docker-php-ext-install zip
-EXPOSE 8080
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+  EXPOSE 8080
 USER node
 CMD ["php-fpm"]

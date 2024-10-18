@@ -16,3 +16,5 @@ services:
       MARIADB_ROOT_PASSWORD: example
     ports:
       - 3306:3306
+    volumes:
+      - ./docker/db/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql

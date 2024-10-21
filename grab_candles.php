@@ -2,10 +2,29 @@
 
 require_once 'bootstrap.php';
 
-$fromDate = $argv[1];
-$toDate = $argv[2];
-$period = $argv[3];
+use GuzzleHttp\Client;
 
-$startDate = new \DateTime($fromDate);
-$endDate = new \DateTime($toDate);
+$symbol = $argv[1];
+$fromDate = $argv[2];
+$toDate = $argv[3];
+$period = $argv[4];
+
+$startDate = new DateTime($fromDate);
+$endDate = new DateTime($toDate);
+
+$client = new Client([
+    'base_uri' => $_ENV['BASE_URI'],
+    'timeout' => 2,
+]);
+$params = [
+    'query' => [
+        'symbols' => $symbol,
+        'period' => $period,
+        'from' => $startDate->format('Y-m-d\TH:i:s\Z'),
+        'till' => $endDate->format('Y-m-d\TH:i:s\Z'),
+    ]
+];
+$response = $client->get($_ENV['API_PATH'], $params);
+$body = $response->getBody();
+echo $body;
 

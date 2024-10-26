@@ -19,6 +19,7 @@ $endDate = new DateTime($toDate);
 $client = new Client([
     'base_uri' => $_ENV['BASE_URI'],
     'timeout' => $_ENV['API_TIMEOUT'],
+    'connect_timeout' => $_ENV['API_CONNECT_TIMEOUT'],
 ]);
 $delta = $endDate->diff($startDate);
 $quantity = ($delta->days * 24 * 60 + $delta->h * 60 + $delta->i) / $period->value;

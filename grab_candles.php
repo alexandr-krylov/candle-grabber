@@ -3,7 +3,7 @@
 require_once 'bootstrap.php';
 
 use GuzzleHttp\Client;
-use app\Candles;
+use app\Candle;
 use app\Enums\Symbol;
 use app\Enums\Period;
 
@@ -22,7 +22,7 @@ $client = new Client([
     'connect_timeout' => $_ENV['API_CONNECT_TIMEOUT'],
 ]);
 $delta = $endDate->diff($startDate);
-$quantity = ($delta->days * 24 * 60 + $delta->h * 60 + $delta->i) / $period->value;
+$quantity = ($delta->days * 24 * 60 + $delta->h * 60 + $delta->i) / $period->value; //estimated quantity may be different
 while ($quantity > 0) {
     $params = [
         'query' => [
@@ -36,7 +36,7 @@ while ($quantity > 0) {
     $response = $client->get($_ENV['API_PATH'], $params);
     $body = json_decode((string)($response->getBody()));
     foreach ($body->$symbol as $data) {
-        $candle = new Candles($data);
+        $candle = new Candle($data);
         $candle->setCurrency(Symbol::{$symbol}->currency());
         $candle->setQuoteCurrency(Symbol::{$symbol}->quoteCurrency());
         $candle->setPeriod($period);

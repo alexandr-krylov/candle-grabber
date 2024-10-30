@@ -4,13 +4,11 @@ namespace app;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use app\Enums\Period;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CandleRepository::class)]
 #[ORM\Table(name: 'candles')]
-class Candles
+class Candle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

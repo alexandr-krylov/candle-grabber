@@ -11,7 +11,7 @@ $symbol = $argv[1];
 $fromDate = $argv[2];
 $toDate = $argv[3];
 $period = Period::{$argv[4]};
-$limit = 1000;
+$limit = $_ENV['DB_LIMIT'];
 
 $startDate = new DateTime($fromDate);
 $endDate = new DateTime($toDate);

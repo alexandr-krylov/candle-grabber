@@ -23,7 +23,12 @@ class CandleRepository extends EntityRepository
                 'quote_currency' => $quote_currency,
                 'period' => $period,
         ])
-        ->setMaxResults(10)
-        ->getResult();
+        ->setMaxResults(1)
+        ->getOneOrNullResult();
+    }
+    public function removeFirstCandle($candle)
+    {
+        $this->getEntityManager()->remove($this->findOneBy($candle));
+        $this->getEntityManager()->flush();
     }
 }

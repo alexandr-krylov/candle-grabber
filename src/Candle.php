@@ -4,10 +4,15 @@ namespace app;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 use app\Enums\Period;
 
 #[ORM\Entity(repositoryClass: CandleRepository::class)]
 #[ORM\Table(name: 'candles')]
+#[Index(name: "time_idx", columns: ["time"])]
+// #[Index(name: "period_idx", columns: ["period"])]
+// #[Index(name: "currency_idx", columns: ["currency"])]
+// #[Index(name: "quote_currency_idx", columns: ["quote_currency"])]
 class Candle
 {
     #[ORM\Id]

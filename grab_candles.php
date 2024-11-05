@@ -23,7 +23,7 @@ $client = new Client([
 ]);
 $delta = $endDate->diff($startDate);
 $quantity = ($delta->days * 24 * 60 + $delta->h * 60 + $delta->i) / $period->value; //estimated quantity may be different
-while ($quantity > 0) {
+while ($endDate > $startDate) {
     $params = [
         'query' => [
             'symbols' => $symbol,
@@ -36,6 +36,13 @@ while ($quantity > 0) {
     $response = $client->get($_ENV['API_PATH'], $params);
     $body = json_decode((string)($response->getBody()));
     foreach ($body->$symbol as $data) {
+        if ($entityManager->getRepository(Candle::class)->findOneBy(
+            [
+                'currency' => Symbol::{$symbol}->currency(),
+                'quote_currency' => Symbol::{$symbol}->quoteCurrency(),
+                'period' => $period,
+                'time' => new DateTime($data->timestamp),
+            ])) continue;
         $candle = new Candle($data);
         $candle->setCurrency(Symbol::{$symbol}->currency());
         $candle->setQuoteCurrency(Symbol::{$symbol}->quoteCurrency());
@@ -51,7 +58,6 @@ while ($quantity > 0) {
         $entityManager->flush();
     }
     echo 'till ' . $endDate->format('Y-m-d\TH:i:s\Z') . "\n";
-    $endDate->sub(new DateInterval('PT' . $period->value * $limit . 'M'));
-    $quantity = $quantity - $limit;
+    $endDate = $candle->getTime()->sub(new DateInterval('PT' . $period->value . 'M'));
     sleep(2);
 }

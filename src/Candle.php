@@ -5,14 +5,16 @@ namespace app;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use app\Enums\Period;
 
 #[ORM\Entity(repositoryClass: CandleRepository::class)]
 #[ORM\Table(name: 'candles')]
 #[Index(name: "time_idx", columns: ["time"])]
-// #[Index(name: "period_idx", columns: ["period"])]
-// #[Index(name: "currency_idx", columns: ["currency"])]
-// #[Index(name: "quote_currency_idx", columns: ["quote_currency"])]
+#[UniqueConstraint(
+    name: "currency_quote_currency_period_time_unique",
+    columns: ["currency", "quote_currency", "period", "time"]
+)]
 class Candle
 {
     #[ORM\Id]
@@ -66,6 +68,10 @@ class Candle
     public function setPeriod(Period $period): void
     {
         $this->period = $period->name;
+    }
+    public function getTime(): DateTime
+    {
+        return $this->time;
     }
     public function setTime(DateTime $time): void
     {

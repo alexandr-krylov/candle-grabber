@@ -22,7 +22,7 @@ $client = new Client([
     'connect_timeout' => $_ENV['API_CONNECT_TIMEOUT'],
 ]);
 $delta = $endDate->diff($startDate);
-$quantity = ($delta->days * 24 * 60 + $delta->h * 60 + $delta->i) / $period->value; //estimated quantity may be different
+$respository = $entityManager->getRepository(Candle::class);
 while ($endDate > $startDate) {
     $params = [
         'query' => [
@@ -36,7 +36,7 @@ while ($endDate > $startDate) {
     $response = $client->get($_ENV['API_PATH'], $params);
     $body = json_decode((string)($response->getBody()));
     foreach ($body->$symbol as $data) {
-        $isExists = $entityManager->getRepository(Candle::class)->findOneBy(
+        $isExists = $respository->findOneBy(
             [
                 'currency' => Symbol::{$symbol}->currency(),
                 'quote_currency' => Symbol::{$symbol}->quoteCurrency(),
@@ -57,6 +57,7 @@ while ($endDate > $startDate) {
         $candle->setVolumeQuote($data->volume_quote);
         $entityManager->persist($candle);
         $entityManager->flush();
+        $entityManager->clear();
     }
     echo 'till ' . $endDate->format('Y-m-d\TH:i:s\Z') . "\n";
     $endDate = (new DateTime($data->timestamp))->sub(new DateInterval('PT' . $period->value . 'M'));

@@ -36,13 +36,14 @@ while ($endDate > $startDate) {
     $response = $client->get($_ENV['API_PATH'], $params);
     $body = json_decode((string)($response->getBody()));
     foreach ($body->$symbol as $data) {
-        if ($entityManager->getRepository(Candle::class)->findOneBy(
+        $isExists = $entityManager->getRepository(Candle::class)->findOneBy(
             [
                 'currency' => Symbol::{$symbol}->currency(),
                 'quote_currency' => Symbol::{$symbol}->quoteCurrency(),
-                'period' => $period,
+                'period' => $period->name,
                 'time' => new DateTime($data->timestamp),
-            ])) continue;
+            ]);
+        if (null !== $isExists) continue;
         $candle = new Candle($data);
         $candle->setCurrency(Symbol::{$symbol}->currency());
         $candle->setQuoteCurrency(Symbol::{$symbol}->quoteCurrency());
@@ -58,6 +59,6 @@ while ($endDate > $startDate) {
         $entityManager->flush();
     }
     echo 'till ' . $endDate->format('Y-m-d\TH:i:s\Z') . "\n";
-    $endDate = $candle->getTime()->sub(new DateInterval('PT' . $period->value . 'M'));
+    $endDate = (new DateTime($data->timestamp))->sub(new DateInterval('PT' . $period->value . 'M'));
     sleep(2);
 }

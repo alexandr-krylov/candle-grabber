@@ -8,6 +8,8 @@ services:
     working_dir: /var/www/candle-grabber
     volumes: 
       - .:/var/www/candle-grabber
+      - ./docker/php/configs/php-memory-limit.ini:/usr/local/etc/php/conf.d/php-memory-limit.ini
+
   db:
     image: mariadb
     container_name: candle-grabber-db

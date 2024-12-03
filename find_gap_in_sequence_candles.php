@@ -37,6 +37,7 @@ foreach ($iterator as $candle) {
     $interval = $previous->getTime()->diff($candle->getTime());
     if ($interval->i + 60 * $interval->h + 1440 * $interval->d > Period::{$period}->value) {
         echo "Gap detected! {$previous->getTime()->format('Y-m-d H:i:s')} ---- {$candle->getTime()->format('Y-m-d H:i:s')}\n";
+        exec("php grab_candles.php $currency$quote_currency $period {$previous->getTime()->format('Y-m-dTH:i:s')} {$candle->getTime()->format('Y-m-dTH:i:s')}");
     }
     $previous = $candle;
     $entityManager->detach($candle);

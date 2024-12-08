@@ -4,6 +4,8 @@ namespace app;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'orders')]
@@ -31,4 +33,8 @@ class Order
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $time;
+
+    #[ManyToOne(targetEntity: Label::class)]
+    #[JoinColumn(name: 'label_id', referencedColumnName: 'id')]
+    private ?Label $label = null;
 }

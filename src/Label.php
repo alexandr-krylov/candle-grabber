@@ -20,4 +20,10 @@ class Label
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $date;
+
+    #[ORM\Column(type: 'decimal', precision: 24, scale: 14)]
+    private string $currency_balance;
+
+    #[ORM\Column(type: 'decimal', precision: 24, scale: 14)]
+    private string $quote_currency_balance;
 }

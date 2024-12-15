@@ -17,13 +17,17 @@ docker exec -it candle-grabber_app_1 bin/doctrine orm:schema-tool:update --force
 
 `docker exec -it candle-grabber_app_1 php grab_candles.php <symbol> <from-date> <to-date> <period>`
 
-#### example
+#### example grabbing
 
 `docker exec -it candle-grabber_app_1 php grab_candles.php XMRBTC 2024-01-01T18:22:00 2024-12-31T23:59:59 M30`
 
 ### 2. Labeling data
 
 `docker exec -it candle-grabber_app_1 php label_candles.php <symbol> <from-date> <to-date> <period> <max-amount> <max-quantity>`
+
+#### example labeling
+
+`docker exec -it candle-grabber_app_1 php label_candles.php XMRBTC 2015-01-01T00:00 2015-12-31T23:59 M1 0.22 10000`
 
 ### 11. Generate population
 

@@ -16,10 +16,8 @@ $config = ORMSetup::createAttributeMetadataConfiguration(
 $connection = DriverManager::getConnection([
     'driver' => $_ENV['DB_DRIVER'],
     'dbname' => $_ENV['DB_DATABASE'],
-    'user' => 'user',
-    'password' => 'example',
-    'host' => 'candle-grabber-db',
-    // 'driver' => 'pdo_sqlite',
-    // 'path' => __DIR__ . '/db.sqlite',
+    'user' => $_ENV['DB_USER'],
+    'password' => $_ENV['DB_PASSWORD'],
+    'host' => $_ENV['DB_HOST'],
 ], $config);
 $entityManager = new EntityManager($connection, $config);

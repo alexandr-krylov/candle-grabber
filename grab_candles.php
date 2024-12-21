@@ -16,11 +16,13 @@ $limit = $_ENV['DB_LIMIT'];
 $startDate = new DateTime($fromDate);
 $endDate = new DateTime($toDate);
 
-$client = new Client([
+$client = new Client(
+    [
     'base_uri' => $_ENV['BASE_URI'],
     'timeout' => $_ENV['API_TIMEOUT'],
     'connect_timeout' => $_ENV['API_CONNECT_TIMEOUT'],
-]);
+    ]
+);
 $delta = $endDate->diff($startDate);
 $respository = $entityManager->getRepository(Candle::class);
 while ($endDate > $startDate) {

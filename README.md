@@ -28,6 +28,7 @@ docker exec -it candle-grabber_app_1 bin/doctrine orm:schema-tool:update --force
 #### example labeling
 
 `docker exec -it candle-grabber_app_1 php label_candles.php XMRBTC 2015-01-01T00:00 2015-12-31T23:59 M1 0.22 10000`
+`docker exec -it candle-grabber_app_1 php label_candles.php XMRUSDT 2017-05-05T15:08 2018-05-05T15:08 M1 0.22 10`
 
 ### 11. Generate population
 

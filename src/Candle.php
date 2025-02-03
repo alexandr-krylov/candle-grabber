@@ -81,9 +81,17 @@ class Candle
     {
         $this->open = $open;
     }
+    public function getOpen(): string
+    {
+        return $this->open;
+    }
     public function setClose(string $close): void
     {
         $this->close = $close;
+    }
+    public function getClose(): string
+    {
+        return $this->close;
     }
     public function setMin(string $min): void
     {

@@ -44,7 +44,8 @@ while ($endDate > $startDate) {
                 'quote_currency' => Symbol::{$symbol}->quoteCurrency(),
                 'period' => $period->name,
                 'time' => new DateTime($data->timestamp),
-            ]);
+            ]
+        );
         if (null !== $isExists) continue;
         $candle = new Candle($data);
         $candle->setCurrency(Symbol::{$symbol}->currency());

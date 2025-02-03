@@ -26,4 +26,17 @@ class Label
 
     #[ORM\Column(type: 'decimal', precision: 24, scale: 14)]
     private string $quote_currency_balance;
+
+    public function __construct(
+        string $symbol,
+        DateTime $date,
+        string $currency_balance,
+        string $quote_currency_balance
+    )
+    {
+        $this->symbol = $symbol;
+        $this->date = $date;
+        $this->currency_balance = $currency_balance;
+        $this->quote_currency_balance = $quote_currency_balance;
+    }
 }

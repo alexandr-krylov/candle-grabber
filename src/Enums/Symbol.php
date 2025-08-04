@@ -34,4 +34,3 @@ enum Symbol
         };
     }
 }
-

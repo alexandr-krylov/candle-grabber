@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'labels')]
 class Label
 {
-    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -32,8 +31,7 @@ class Label
         DateTime $date,
         string $currency_balance,
         string $quote_currency_balance
-    )
-    {
+    ) {
         $this->symbol = $symbol;
         $this->date = $date;
         $this->currency_balance = $currency_balance;

@@ -15,7 +15,7 @@ class BugRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public  function getRecentBugsArray($number = 30)
+    public function getRecentBugsArray($number = 30)
     {
         $dql = "SELECT b, e, r, p FROM " . Bug::class . " b JOIN b.engineer e " .
             "JOIN b.reporter r JOIN b.products p ORDER BY b.created DESC";
@@ -38,8 +38,8 @@ class BugRepository extends EntityRepository
 
     public function getOpenBugsByProduct()
     {
-        $dql = "SELECT p.id, p.name, count(b.id) AS openBugs FROM " . 
-            Bug::class . " b JOIN b.products p " . 
+        $dql = "SELECT p.id, p.name, count(b.id) AS openBugs FROM " .
+            Bug::class . " b JOIN b.products p " .
             "WHERE b.status = 'OPEN' GROUP BY p.id";
         return $this->getEntityManager()->createQuery($dql)->getScalarResult();
     }

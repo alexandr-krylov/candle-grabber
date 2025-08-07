@@ -6,8 +6,8 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'labels')]
-class Label
+#[ORM\Table(name: 'balances')]
+class Balance
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

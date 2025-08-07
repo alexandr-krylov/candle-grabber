@@ -4,8 +4,8 @@ require_once 'bootstrap.php';
 
 use GuzzleHttp\Client;
 use app\Candle;
-use app\Enums\Symbol;
-use app\Enums\Period;
+use app\Enum\Symbol;
+use app\Enum\Period;
 
 $symbol = $argv[1];
 $fromDate = $argv[2];

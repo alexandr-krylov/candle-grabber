@@ -3,7 +3,7 @@
 require_once 'bootstrap.php';
 
 use app\Candle;
-use app\Enums\Period;
+use app\Enum\Period;
 use Doctrine\ORM\Query\Parameter;
 use Doctrine\Common\Collections\ArrayCollection;
 

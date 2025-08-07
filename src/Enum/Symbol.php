@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Enums;
+namespace app\Enum;
 
 enum Symbol
 {

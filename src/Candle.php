@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\UniqueConstraint;
-use app\Enums\Period;
+use app\Enum\Period;
 
 #[ORM\Entity(repositoryClass: CandleRepository::class)]
 #[ORM\Table(name: 'candles')]
@@ -65,10 +65,22 @@ class Candle
     {
         $this->quote_currency = $quote_currency;
     }
+
+    public function getQuoteCurrency(): string
+    {
+        return $this->quote_currency;
+    }
+    
     public function setPeriod(Period $period): void
     {
         $this->period = $period->name;
     }
+
+    public function getPeriod(): string
+    {
+        return $this->period;
+    }
+
     public function getTime(): DateTime
     {
         return $this->time;
@@ -97,16 +109,44 @@ class Candle
     {
         $this->min = $min;
     }
+
+    public function getMin(): string
+    {
+        return $this->min;
+    }
+
     public function setMax(string $max): void
     {
         $this->max = $max;
     }
+
+    public function getMax(): string
+    {
+        return $this->max;
+    }
+
     public function setVolume(string $volume): void
     {
         $this->volume = $volume;
     }
+
+    public function getVolume(): string
+    {
+        return $this->volume;
+    }
+
     public function setVolumeQuote(string $volume_quote): void
     {
         $this->volume_quote = $volume_quote;
+    }
+
+    public function getVolumeQuote(): string
+    {
+        return $this->volume_quote;
+    }
+    
+    public function getCurrency(): string
+    {
+        return $this->currency;
     }
 }

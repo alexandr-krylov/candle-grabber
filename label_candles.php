@@ -2,7 +2,6 @@
 
 require_once 'bootstrap.php';
 
-use app\Label;
 use app\Candle;
 use app\Enum\Symbol;
 use app\Enum\Period;

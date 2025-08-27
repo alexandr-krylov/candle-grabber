@@ -7,6 +7,10 @@ docker-compose up
 docker exec -it candle-grabber_app_1 composer install  
 docker exec -it candle-grabber_app_1 bin/doctrine orm:schema-tool:create  
 
+## Testing
+
+docker exec -it candle-grabber_app_1 composer test  
+
 ### Update schema
 
 docker exec -it candle-grabber_app_1 bin/doctrine orm:schema-tool:update --force  

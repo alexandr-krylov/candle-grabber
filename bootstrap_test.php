@@ -4,6 +4,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Dotenv\Dotenv;
+use Doctrine\ORM\Tools\SchemaTool;
 
 require_once 'vendor/autoload.php';
 
@@ -24,3 +25,7 @@ $connection = DriverManager::getConnection(
     $config
 );
 $entityManager = new EntityManager($connection, $config);
+$metadata = $entityManager->getMetadataFactory()->getAllMetadata();
+$schemaTool = new SchemaTool($entityManager);
+$schemaTool->dropDatabase();   // удалить всё
+$schemaTool->createSchema($metadata); // пересоздать

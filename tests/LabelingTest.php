@@ -9,14 +9,19 @@ use app\Service\Labeling;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\Attributes\TestWith;
 use DateTime;
+use Dom\Entity;
 
 final class LabelingTest extends TestCase
 {
     private EntityManager $entityManager;
+    private EntityManager $realEntityManager;
     public function setUp(): void
     {
+        require 'bootstrap.php';
+        $this->realEntityManager = $entityManager;
         require 'bootstrap_test.php';
         $this->entityManager = $entityManager;
+        //make fake candle data by copying from real data
     }
 
     #[TestWith([

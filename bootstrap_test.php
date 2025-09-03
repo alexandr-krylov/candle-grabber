@@ -27,5 +27,5 @@ $connection = DriverManager::getConnection(
 $entityManager = new EntityManager($connection, $config);
 $metadata = $entityManager->getMetadataFactory()->getAllMetadata();
 $schemaTool = new SchemaTool($entityManager);
-$schemaTool->dropDatabase();   // удалить всё
-$schemaTool->createSchema($metadata); // пересоздать
+$schemaTool->dropDatabase();
+$schemaTool->createSchema($metadata);

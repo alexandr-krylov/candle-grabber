@@ -12,7 +12,9 @@ $fromDate = $argv[2];
 $toDate = $argv[3];
 $period = Period::{$argv[4]};
 $maxAmount = $argv[5];
-$maxQuantity = $argv[6];
+$maxAmountQuotedCurrency = $argv[6];
+$maxQuantity = $argv[7];
+
 
 $limit = $_ENV['DB_LIMIT'];
 
@@ -48,11 +50,11 @@ for (; $maxQuantity--;) {
     // var_dump($body);
     $middlePrice = ($candle->getOpen() + $candle->getClose()) / 2;
     echo "middle price $middlePrice\n";
-    $maxAmountQuotedCurrency = $middlePrice * $maxAmount;
+    // $maxAmountQuotedCurrency = $middlePrice * $maxAmount;
     echo "max amount quoted currency $maxAmountQuotedCurrency\n";
     $amountQuotedCurrency = $randomizer->getFloat(
         0,
-        $middlePrice * $maxAmount
+        $maxAmountQuotedCurrency
     );
     echo "amount quoted currency $amountQuotedCurrency\n";
     //make random order 1 of 4 times

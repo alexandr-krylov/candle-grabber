@@ -27,7 +27,7 @@ docker exec -it candle-grabber_app_1 bin/doctrine orm:schema-tool:update --force
 
 ### 2. Labeling data
 
-`docker exec -it candle-grabber_app_1 php label_candles.php <symbol> <from-date> <to-date> <period> <max-amount> <max-quantity>`
+`docker exec -it candle-grabber_app_1 php label_candles.php <symbol> <from-date> <to-date> <period> <max-amount> <max-quote-amount> <max-quantity>`
 
 #### example labeling
 

@@ -3,6 +3,8 @@
 namespace app;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -31,4 +33,24 @@ class Order
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $time;
+
+    #[ORM\ManyToMany(targetEntity: Label::class, mappedBy: 'orders')]
+    private Collection $labels;
+
+    public function __construct(
+        string $symbol,
+        string $side,
+        string $price,
+        string $quantity,
+        string $quantityCumalative,
+        DateTime $time
+    ) {
+        $this->symbol = $symbol;
+        $this->side = $side;
+        $this->price = $price;
+        $this->quantity = $quantity;
+        $this->quantityCumalative = $quantityCumalative;
+        $this->time = $time;
+        $this->labels = new ArrayCollection();
+    }
 }

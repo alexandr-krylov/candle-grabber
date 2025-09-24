@@ -3,7 +3,10 @@
 namespace app;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 #[ORM\Entity]
 #[ORM\Table(name: 'labels')]
@@ -28,6 +31,43 @@ class Label
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $createdAt;
+
+    #[ORM\ManyToMany(targetEntity: Balance::class, inversedBy: 'labels')]
+    #[ORM\JoinTable(name: 'labels_balances')]
+    private Collection $balances;
+
+    #[ORM\ManyToMany(targetEntity: Order::class, inversedBy: 'labels')]
+    #[ORM\JoinTable(name: 'labels_orders')]
+    private Collection $orders;
+
+    public function __construct(
+        DateTime $startedAt,
+        DateTime $endedAt,
+        string $symbol,
+        string $period
+    ) {
+        $this->startedAt = $startedAt;
+        $this->endedAt = $endedAt;
+        $this->symbol = $symbol;
+        $this->period = $period;
+        $this->createdAt = new DateTime();
+        $this->balances = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+    }
+
+    public function addBalance(Balance $balance): void
+    {
+        if (!$this->balances->contains($balance)) {
+            $this->balances[] = $balance;
+        }
+    }
+
+    public function addOrder(Order $order): void
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+        }
+    }
 
     public function getId(): ?int
     {
